@@ -1,0 +1,64 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#   Powershell:
+#     Psini: 3.1.3
+#
+#  Name:
+#    spl_configure_manager_node.yml
+#
+#  Description:
+#    Configuring Splunk Manager node role and performing some 'best practice' settings
+#
+#  Input:
+#    spl_idxc_rep_factor # Replication factor of indexer cluster; Equals number of idx instances in cluster
+#    spl_idxс_key # Indexer cluster security key; Taken from Rattic
+#    spl_idxc_label # Name of Indexer cluster
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_search_factor # Search factor of indexer cluster; Amount of searchable bucket copies
+#    spl_username # Splunk admin account; Taken from Rattic
+#    spl_password # Taken from Rattic
+#    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
+#      
+#  Output:
+#    -
+#
+#  Requirements:
+#    Run only on server which selected as manager node
+#    Splunk executable dir in PATH
+#    Powershell module:
+#      Psini
+
+---
+
+- name: 'SPL :: Configuring manager node'
+  #ansible.windows.win_shell
+  win_shell: |
+    splunk edit cluster-config -mode manager -replication_factor '{{ spl_idxc_rep_factor }}' -search_factor '{{ spl_search_factor }}' -cluster_label '{{ spl_idxc_label }}' -auth '{{ spl_username }}:{{ spl_password }}'
+
+- name: 'SPL :: Performing best-practice cluster settings'
+  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    ini_section: 'clustering'
+    #ini_section: '{{ item.section }}'
+    ini_option: '{{ item.option }}'
+    ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\system\local\server.conf'
+    ini_mode: 'set'
+  loop:
+    - { section: '', option: 'pass4SymmKey', value: '{{ spl_idxc_key }}' }
+    - { section: '', option: 'restart_timeout', value: '600' }
+    - { section: '', option: 'rolling_restart', value: 'searchable_force' }
+    - { section: '', option: 'decommission_force_timeout', value: '180' }
+  loop_control:
+    index_var: loop_idx
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0

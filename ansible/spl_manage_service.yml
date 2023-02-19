@@ -1,0 +1,30 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#
+#
+#  Name:
+#    spl_manage_service.yml
+#
+#  Description:
+#    Manages splunkd service status
+#    Use it for start, stop or restart splunkd service
+#
+#  Input:
+#    spl_service_action # Allow values is start, stop or restart
+#      
+#  Output:
+#    -
+#
+#  Requirements:
+#    Splunk executable dir in PATH
+
+- name: 'SPL :: Performing {{ spl_service_action | upper }} action to splunkd service'
+  #ansible.windows.win_shell
+  win_shell: |
+    splunk '{{ spl_service_action }}'

@@ -1,0 +1,87 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#
+#  Name:
+#    spl_change_index_store.yml
+#
+#  Description:
+#    Changing index store location
+#
+#  Input:
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_splunkdb_new # New location of splunkdb
+#    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
+#      
+#  Output:
+#    -
+#
+#  Requirements:
+#    Splunk executable dir in PATH
+#    Powershell module:
+#      Psini
+
+---
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'stop'
+
+- name: 'SPL :: Creating root splunkdb dir'
+  #ansible.windows.win_file
+  win_file:
+    path: '{{ spl_splunkdb_new }}'
+    state: directory
+
+- name: 'SPL :: Coping old data to new location'
+#ansible.windows.win_shell
+  win_shell: |
+    xcopy '{{ spl_home_dir }}\var\lib\splunk\*.*' '{{ spl_splunkdb_new }}' /s /e /v /o /k /y
+
+- name: 'SPL :: Editing {{ spl_home_dir }}\etc\splunk-launch.conf'
+  debug:
+    msg: 'Deleting commented values'
+
+- include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    ini_section: '_'
+    #ini_section: '{{ item.section }}'
+    ini_option: '{{ item.option }}'
+    ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\splunk-launch.conf'
+    ini_mode: delo
+  loop:
+    - { section: '', option: '# SPLUNK_DB', value: '' }
+    - { section: '', option: '# SPLUNK_HOME', value: '' }
+  loop_control:
+    index_var: loop_idx
+
+- name: 'SPL :: Editing {{ spl_home_dir }}\etc\splunk-launch.conf'
+  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    #ini_section: '_'
+    ini_section: '{{ item.section }}'
+    ini_option: '{{ item.option }}'
+    ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\splunk-launch.conf'
+    ini_mode: 'set'
+  loop:
+    - { section: '_', option: 'SPLUNK_DB', value: '{{ spl_splunkdb_new }}' }
+  loop_control:
+    index_var: loop_idx
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0
+
+- name: 'SPL :: Deleting old data'
+  #ansible.windows.win_file
+  win_file:
+    path: '{{ spl_splunkdb_old }}'
+    state: absent

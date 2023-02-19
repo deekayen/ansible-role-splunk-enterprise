@@ -1,0 +1,47 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#
+#  Name:
+#    spl_configure_idxc_member.yml
+#
+#  Description:
+#    Configuring Indexer cluster members
+#
+#  Input:
+#    spl_idxс_key # Indexer cluster security key; Taken from Rattic
+#    spl_idxc_rep_port # Indexer cluster replication port; Default 9887
+#    spl_management_port # Splunk management port; Default 8089
+#    spl_username # Splunk admin account; Taken from Rattic
+#    spl_password # Taken from Rattic
+#      
+#  Output:
+#    -
+#
+#  Requirements:
+#    Run only on server(s) which selected as indexer cluster member
+#    Splunk executable dir in PATH
+
+---
+
+- name: 'SPL :: Collecting manager node group'
+  set_fact:
+    spl_manager_node_group: '{{ (group_names | last).split("_")[:-1] | join ("_") }}_ms'
+
+- name: 'SPL :: Setting manager node uri'
+  set_fact:
+    spl_manager_node_uri: 'https://{{ groups[spl_manager_node_group][0] }}:{{ spl_management_port }}'
+    
+- name: 'SPL :: Configuring Indexer cluster member'
+  #ansible.windows.win_shell
+  win_shell: |
+    splunk edit cluster-config -mode peer -manager_uri '{{ spl_manager_node_uri }}' -replication_port '{{ spl_idxc_rep_port }}' -secret '{{ spl_idxc_key }}' -auth '{{ spl_username }}:{{ spl_password }}'
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
