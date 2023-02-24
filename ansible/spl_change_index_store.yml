@@ -6,6 +6,8 @@
 #   Splunk Enterprise for Windows:
 #     Version: 9.0.0.1
 #     Build: 9e907cedecb1
+#   Powershell:
+#     Psini: 3.1.3
 #
 #  Name:
 #    spl_change_index_store.yml
