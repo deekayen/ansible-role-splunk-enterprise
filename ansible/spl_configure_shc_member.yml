@@ -41,7 +41,7 @@
 
 - name: 'SPL :: Collecting Deployer group'
   set_fact:
-    spl_deployer_group: '{{ (group_names | last).split("_")[:-1] | join ("_") }}_ms'
+    spl_deployer_group: '{{ (group_names | last).split("_")[:-1] | join ("_") }}_shd'
 
 - name: 'SPL :: Setting Deployer and SHC member uris'
   set_fact:
