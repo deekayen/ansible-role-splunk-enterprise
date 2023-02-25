@@ -18,11 +18,11 @@
 #  Input:
 #    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
 #    spl_ldap_name # LDAP stanza name
-#    spl_ldap_admin_group # 
-#    spl_ldap_can_delete_group #
-#    spl_ldap_power_group # 
-#    spl_ldap_user_group #
-#    spl_ldap_ssr_group #
+#    spl_ldap_admin_group # May be $null
+#    spl_ldap_can_delete_group # May be $null
+#    spl_ldap_power_group # May be $null
+#    spl_ldap_user_group # May be $null
+#    spl_ldap_ssr_group # May be $null
 #    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
 #
 #  Output:
