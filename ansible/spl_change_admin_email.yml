@@ -1,0 +1,38 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#
+#  Name:
+#    spl_change_admin_email.yml
+#
+#  Description:
+#    Changing buil-in admin email
+#
+#  Input:
+#    spl_admin_mail # New value of built-in admin email
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_skip_restart # 1 - yes; 0 - no; Restart require but you can skip it
+#      
+#  Output:
+#    -
+#
+
+---
+
+- name: 'SPL :: Changing bult-in admin mail'
+  win_lineinfile:
+  #community.windows.win_lineinfile:
+    path: '{{ spl_home_dir }}\etc\passwd'
+    backrefs: true
+    regex: '(?<=:admin:)(.*[^:])(?=:{1,})'
+    line: '{{ spl_admin_email }}'
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0

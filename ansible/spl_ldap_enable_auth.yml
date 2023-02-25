@@ -10,41 +10,37 @@
 #     Psini: 3.1.3
 #
 #  Name:
-#    spl_configure_deployer.yml
+#    spl_ldap_enable_auth.yml
 #
 #  Description:
-#    Configuring Splunk Deployer role
+#    Enabling added LDAP stanza(s)
 #
 #  Input:
 #    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
-#    spl_shс_key # Search head cluster security key
-#    spl_shc_label # Name of Search Head cluster; Must be the same on each cluster member
+#    spl_ldap_names_enable # List of LDAP stanza names separated by comma which need to be enable
 #    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
-#      
+#
 #  Output:
 #    -
 #
 #  Requirements:
-#    Run only on server which selected as deployer
-#    Splunk executable dir in PATH
 #    Powershell module:
 #      Psini
 
-- name: 'SPL :: Configuring Deployer'
-  debug:
-    msg: 'Performing tasks to configure Deployer'
+---
 
-- name: 'SPL :: Configuring {{ spl_home_dir }}\etc\system\local\server.conf'
+- name: 'SPL :: Mapping roles with LDAP groups by editing {{ spl_home_dir }}\etc\system\local\authentication.conf'
   include_tasks: ../ansible_play/windows/windows_edit_ini.yml
   vars:
-    ini_section: 'shclustering'
+    ini_section: 'authentication'
+    #ini_section: '{{ item.section }}'
     ini_option: '{{ item.option }}'
     ini_value: '{{ item.value }}'
-    ini_path: '{{ spl_home_dir }}\etc\system\local\server.conf'
+    ini_path: '{{ spl_home_dir }}\etc\system\local\authentication.conf'
     ini_mode: 'set'
   loop:
-  - { section: '', option: 'pass4SymmKey', value: '{{ spl_shc_key }}' }
-  - { section: '', option: 'shcluster_label', value: '{{ spl_shc_label }}' }
+    - { section: '', option: 'authSettings', value: '{{ spl_ldap_names_enable }}' }
+    - { section: '', option: 'authType', value: 'LDAP' }
   loop_control:
     index_var: loop_idx
 

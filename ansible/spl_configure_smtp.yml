@@ -1,0 +1,67 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#   Powershell:
+#     Psini: 3.1.3
+#
+#  Name:
+#    spl_configure_smtp.yml
+#
+#  Description:
+#    Adding SMTP configuration
+#
+#  Input:
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_smtp_allow_domain_list # Specifies a list of domains to which users are allowed to send email
+#    spl_smtp_auth_username # STMP user
+#    spl_smtp_auth_password #
+#    spl_smtp_footer_text # Specify an alternate email footer
+#    spl_smtp_from # Email address from which the alert originates
+#    spl_smtp_mailserver # SMTP server name
+#    spl_smtp_pdf_footer_enabled # 0 - disabled; 1- enabled
+#    spl_smtp_pdf_header_enabled # 0 - disabled; 1- enabled
+#    spl_smtp_pdf_image_renderring # 0 - disabled; 1- enabled
+#    spl_smtp_use_tls # 0 - disabled; 1- enabled
+#    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
+#
+#  Output:
+#    -
+#
+#  Requirements:
+#    Powershell module:
+#      Psini
+
+---
+
+- name: 'SPL :: Mapping roles with LDAP groups by editing {{ spl_home_dir }}\etc\system\local\alert_actions.conf'
+  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    ini_section: 'email'
+    #ini_section: '{{ item.section }}'
+    ini_option: '{{ item.option }}'
+    ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\system\local\alert_actions.conf'
+    ini_mode: 'set'
+  loop:
+    - { section: '', option: 'allowedDomainList', value: '{{ spl_smtp_allow_domain_list }}' }
+    - { section: '', option: 'auth_password', value: '{{ spl_smtp_auth_password }}' }
+    - { section: '', option: 'auth_username', value: '{{ spl_smtp_auth_username }}' }
+    - { section: '', option: 'footer.text', value: '{{ spl_smtp_footer_text }}' }
+    - { section: '', option: 'from', value: '{{ spl_smtp_from }}' }
+    - { section: '', option: 'mailserver', value: '{{ spl_smtp_mailserver }}' }
+    - { section: '', option: 'pdf.footer_enabled', value: '{{ spl_smtp_pdf_footer_enabled }}' }
+    - { section: '', option: 'pdf.header_enabled', value: '{{ spl_smtp_pdf_header_enabled }}' }
+    - { section: '', option: 'pdf.html_image_rendering ', value: '{{ spl_smtp_pdf_image_renderring }}' }
+    - { section: '', option: 'use_tls', value: '{{ spl_smtp_use_tls }}' }
+  loop_control:
+    index_var: loop_idx
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0

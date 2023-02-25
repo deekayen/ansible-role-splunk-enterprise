@@ -21,12 +21,12 @@
 #  Input:
 #    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
 #    spl_management_port # Splunk management port; Default 8089
-#    spl_shc_key # Indexer cluster security key; Taken from Rattic
+#    spl_shc_key # Indexer cluster security key
 #    spl_shc_label # Name of Search Head cluster; Must be the same on each cluster member
 #    spl_shc_rep_factor # Replication factor of indexer cluster; Equals number of sh instances in cluster
 #    spl_shc_rep_port # Search head cluster replication port; Default 9777
-#    spl_username # Splunk admin account; Taken from Rattic
-#    spl_password # Taken from Rattic
+#    spl_username # Splunk admin account
+#    spl_password #
 #    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
 #      
 #  Output:
