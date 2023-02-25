@@ -1,0 +1,93 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#   Powershell:
+#     Psini: 3.1.3
+#
+#  Name:
+#    spl_add_ldap_auth.yml
+#
+#  Description:
+#    Adding LDAP authentication type to authentication.conf
+#
+#  Input:
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_ldap_name # LDAP stanza name
+#    spl_ldap_ssl_enabled # 0 - disable; 1- enable
+#    spl_ldap_anonymous_referrals: 0 - disable; 1 - enable
+#    spl_ldap_bind_dn # LDAP Distinguished Name of the user that retrieves the LDAP entries
+#    spl_ldap_bind_dn_password #
+#    spl_ldap_email_attribute: 'mail' # User's email address; Default 'mail'
+#    spl_ldap_enable_range_retrieval: 0 - disable; 1 - enable; Enables result sets for a given attribute that exceed the maximum number of values defined for the LDAP server  
+#    spl_ldap_group_base_dn # LDAP Distinguished Names of LDAP entries whose subtrees contain the groups
+#    spl_ldap_group_base_filter # LDAP search filter for groups
+#    spl_ldap_group_mapping_attribute # Value that group entries use to declare membership
+#    spl_ldap_group_member_attribute # Group member attribute
+#    spl_ldap_group_name_attribute # Group name attribute
+#    spl_ldap_host # LDAP server name
+#    spl_ldap_nested_groups # 0 - disable; 1 - enable
+#    spl_ldap_network_timeout # Limits the amount of time a socket polls a connection without activity
+#    spl_ldap_pagelimit # Maximum number of entries to return in each page; Default '-1' - no pages
+#    spl_ldap_port # LDAP server port
+#    spl_ldap_real_name_attribute # User's real, human readable name
+#    spl_ldap_size_limit # Limits the amount of entries that the Splunk platform requests in LDAP search
+#    spl_ldap_time_limit # Limits the amount of time, in seconds, that the Splunk platform waits for an LDAP search request to complete
+#    spl_ldap_user_base_dn # Distinguished names of LDAP entries whose subtrees contain the user
+#    spl_ldap_user_base_filter # LDAP search filter for users
+#    spl_ldap_user_name_attribute # Username attribute
+#    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
+# 
+#  Output:
+#    -
+#
+#  Requirements:
+#    Powershell module:
+#      Psini
+
+---
+
+- name: 'SPL :: Setting LDAP by editing {{ spl_home_dir }}\etc\system\local\authentication.conf'
+  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    ini_section: '{{ spl_ldap_name }}'
+    #ini_section: '{{ item.section }}'
+    ini_option: '{{ item.option }}'
+    ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\system\local\authentication.conf'
+    ini_mode: 'set'
+  loop:
+    - { section: '', option: 'SSLEnabled', value: '{{ spl_ldap_ssl_enabled }}' }
+    - { section: '', option: 'anonymous_referrals', value: '{{ spl_ldap_anonymous_referrals }}' }
+    - { section: '', option: 'bindDN', value: '{{ spl_ldap_bind_dn }}' }
+    - { section: '', option: 'bindDNpassword', value: '{{ spl_ldap_bind_dn_password }}' }
+    - { section: '', option: 'charset', value: 'utf8' }
+    - { section: '', option: 'emailAttribute', value: '{{ spl_ldap_email_attribute }}' }
+    - { section: '', option: 'enableRangeRetrieval', value: '{{ spl_ldap_enable_range_retrieval }}' }
+    - { section: '', option: 'groupBaseDN', value: '{{ spl_ldap_group_base_dn }}' }
+    - { section: '', option: 'groupBaseFilter', value: '{{ spl_ldap_group_base_filter }}' }
+    - { section: '', option: 'groupMappingAttribute', value: '{{ spl_ldap_group_mapping_attribute }}' }
+    - { section: '', option: 'groupMemberAttribute', value: '{{ spl_ldap_group_member_attribute }}' }
+    - { section: '', option: 'groupNameAttribute ', value: '{{ spl_ldap_group_name_attribute }}' }
+    - { section: '', option: 'host ', value: '{{ spl_ldap_host }}' }
+    - { section: '', option: 'nestedGroups', value: '{{ spl_ldap_nested_groups }}' }
+    - { section: '', option: 'pagelimit', value: '{{ spl_ldap_pagelimit }}' }
+    - { section: '', option: 'network_timeout', value: '{{ spl_ldap_network_timeout }}' }
+    - { section: '', option: 'port', value: '{{ spl_ldap_port }}' }
+    - { section: '', option: 'realNameAttribute', value: '{{ spl_ldap_real_name_attribute }}' }
+    - { section: '', option: 'sizelimit', value: '{{ spl_ldap_size_limit }}' }
+    - { section: '', option: 'timelimit', value: '{{ spl_ldap_time_limit }}' }
+    - { section: '', option: 'userBaseDN', value: '{{ spl_ldap_user_base_dn }}' }
+    - { section: '', option: 'userBaseFilter', value: '{{ spl_ldap_user_base_filter }}' }
+    - { section: '', option: 'userNameAttribute', value: '{{ spl_ldap_user_name_attribute }}' }
+  loop_control:
+    index_var: loop_idx
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0
