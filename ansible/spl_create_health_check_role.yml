@@ -1,0 +1,44 @@
+#  Name:
+#    spl_create_health_check_role.yml
+#
+#  Description:
+#    Creating health check role
+#    This role have rights to REST endpoint https://example.server.com:8089/services/server/info which contain 'health_info' property
+#    'health_info = green' means that indexer works properly
+#    You can use this information to check indexer status which may be used on hardware load balancer
+#
+#  Input:
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
+#
+#  Output:
+#    -
+#
+#  Requirements:
+#    Run only on server(s) which selected as indexer cluster member
+#    Powershell module:
+#      Psini
+
+---
+
+- name: 'SPL :: Creating health_check role to monitor indexers status'
+  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    ini_section: 'role_health_check'
+    #ini_section: '{{ item.section }}'
+    ini_option: '{{ item.option }}'
+    ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\system\local\authorize.conf'
+    ini_mode: 'set'
+  loop:
+    - { section: '', option: 'cumulativeRTSrchJobsQuota', value: '0' }
+    - { section: '', option: 'cumulativeSrchJobsQuota', value: '0' }
+    - { section: '', option: 'list_health', value: 'enabled' }
+    - { section: '', option: 'srchMaxTime', value: '8640000' }
+  loop_control:
+    index_var: loop_idx
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0

@@ -14,11 +14,11 @@
 #    Configuring Indexer cluster members
 #
 #  Input:
-#    spl_idxс_key # Indexer cluster security key; Taken from Rattic
+#    spl_idxс_key # Indexer cluster security key
 #    spl_idxc_rep_port # Indexer cluster replication port; Default 9887
 #    spl_management_port # Splunk management port; Default 8089
-#    spl_username # Splunk admin account; Taken from Rattic
-#    spl_password # Taken from Rattic
+#    spl_username # Splunk admin account
+#    spl_password #
 #      
 #  Output:
 #    -

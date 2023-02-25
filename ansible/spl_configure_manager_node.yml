@@ -17,12 +17,12 @@
 #
 #  Input:
 #    spl_idxc_rep_factor # Replication factor of indexer cluster; Equals number of idx instances in cluster
-#    spl_idxс_key # Indexer cluster security key; Taken from Rattic
+#    spl_idxс_key # Indexer cluster security key
 #    spl_idxc_label # Name of Indexer cluster
 #    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
 #    spl_search_factor # Search factor of indexer cluster; Amount of searchable bucket copies
-#    spl_username # Splunk admin account; Taken from Rattic
-#    spl_password # Taken from Rattic
+#    spl_username # Splunk admin account
+#    spl_password #
 #    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
 #      
 #  Output:

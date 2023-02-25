@@ -1,0 +1,60 @@
+# Sctipted by:
+#   Po-temkin
+#
+# Tested on:
+#   Ansible: 2.9
+#   Splunk Enterprise for Windows:
+#     Version: 9.0.0.1
+#     Build: 9e907cedecb1
+#   Powershell:
+#     Psini: 3.1.3
+#
+#  Name:
+#    spl_disable_default_app.yml
+#
+#  Description:
+#    Disabling default Splunk app(s) by adding 'state = disabled' in app.conf
+#
+#  Input:
+#    spl_app_dirs # Splunk default app directory(s);  Expecting directories list separated by comma
+#    spl_home_dir # Path to Splunk home dir; Default 'C:\Program Files\Splunk'; Taken from inventory
+#    spl_skip_restart # 1 - yes; 0 - no; Restart is required but you can skip it
+#      
+#  Output:
+#    -
+#
+#  Requirements:
+#    Powershell module:
+#      Psini
+
+---
+- name: 'SPL :: Transforming list to array'
+  set_fact:
+    spl_app_dir_list: "{{ spl_app_dirs.split(',') }}"
+
+- name: 'SPL :: Creating {{ spl_home_dir }}\etc\apps\{{ item }}\local'
+  win_file:
+  #ansible.windows.win_file
+    path: '{{ spl_home_dir }}\etc\apps\{{ item }}\local'
+    state: directory
+  loop: '{{ spl_app_dir_list }}'
+
+- name: 'SPL :: Disabling app'
+  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  vars:
+    ini_section: 'install'
+    #ini_section: '{{ item.section }}'
+    ini_option: 'state'
+    #ini_option: '{{ item.option }}'
+    ini_value: 'disabled'
+    #ini_value: '{{ item.value }}'
+    ini_path: '{{ spl_home_dir }}\etc\apps\{{ item }}\local\app.conf'
+    ini_mode: 'set'
+  loop: '{{ spl_app_dir_list }}'
+  loop_control:
+    index_var: loop_idx
+
+- import_tasks: ./spl_manage_service.yml
+  vars:
+    spl_service_action: 'restart'
+  when: spl_skip_restart == 0
