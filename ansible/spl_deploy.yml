@@ -44,7 +44,7 @@
         #spl_home_dir # Path to Splunk home dir; Taken from inventory
 
 #Stage 3 :: Installing Psini module
-    - import_tasks: ./powershell/powershell_install_psini.yml
+    - import_tasks: ./windows/powershell/powershell_install_psini.yml
       vars:
         powershell_psini_zip: 'Psini.zip' # ZIP archive with Psini module
         powershell_psini_location: '\\example\folder\Powershell\Modules' # ZIP archive location

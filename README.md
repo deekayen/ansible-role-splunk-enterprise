@@ -5,7 +5,6 @@ I used this playbooks to deploy Splunk in my company.
 ## Table of content
 1. Description
 1. Getting Started
-1. List of playbooks
 
 ### Desctiption
 In each playbook you can find some usable information in header-comment.
@@ -24,12 +23,13 @@ Header contains the following sections:
 ### Getting Started
 #### Getting started with this playbooks will requires you to:
 1. Ansible controller
-1. Couple of VMs with Windows Server onboard
+1. A couple of VMs with Windows Server onboard
 1. Splunk Enterprise installer
 1. Powershell module Psini in ZIP archive
 1. LDAP and SMTP server (if you need it)
 1. Correct inventory file
 1. 'Master' playbook (spl_deploy.yml) with defined variables and all needed tasks
+1. A couple of playbooks from another my repository
 
 #### Ansible
 In our company we using Ansible 2.9 for some reasons. I can't test this set on Ansible > 2.9 so be carefully when yoi run it on different Ansible version.
@@ -64,4 +64,7 @@ Aslo determine role of each VM using the following groups:
 #### Master Playbook
 To run all set of playbooks you need to set up spl_deploy correctly. In this file you determine most of variables and select which playbooks you need to run. Example spl_deploy.yml file contain all playbooks but you can delete some if you understand that you don't need it.
 
-### List of playbooks
+#### Another playbooks
+I put some playbooks in another repository because they aren't related with splunk directly. Despite this, they are necessary to deployment process. You need:
+* powershell_install_psini.yml
+* windows_edit_ini.yml
