@@ -6,6 +6,9 @@
 #   Splunk Enterprise for Windows:
 #     Version: 9.0.0.1
 #     Build: 9e907cedecb1
+#   Windows Server:
+#     Version: 2019
+#
 #  Name:
 #    spl_deploy.yml
 #
