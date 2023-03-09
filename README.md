@@ -22,7 +22,7 @@ Header contains the following sections:
     * Required additional information 
 
 #### Getting Started
-## Getting started with this playbooks will requires you to:
+#### Getting started with this playbooks will requires you to:
 1. Ansible controller
 1. Couple of VMs with Windows Server onboard
 1. Splunk Enterprise installer
@@ -60,3 +60,8 @@ Aslo determine role of each VM using the following groups:
 * spl_mn - Manager node server
 * spl_sh - Members of search head cluster
 * spl_shd - Search head deployer server
+
+#### Master Playbook
+To run all set of playbooks you need to set up spl_deploy correctly. In this file you determine most of variables and select which playbooks you need to run. Example spl_deploy.yml file contain all playbooks but you can delete some if you understand that you don't need it.
+
+#### List of playbooks
