@@ -90,5 +90,5 @@ Here you can find all playbooks with their description. Playbooks are ordered in
 * [spl_ldap_enable_auth.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_ldap_enable_auth.yml) - Enabling added LDAP stanza(s);
 * [spl_change_admin_email.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_change_admin_email.yml) - Changing buil-in admin email;
 * [spl_configure_smtp.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_smtp.yml) - Adding SMTP configuration;
-* [spl_change_builtin_indexes.yml]() - Changing frozenTimePeriodInSecs option of each built-in index
-* [spl_idxc_change_builtin_indexes.yml]() - Changing frozenTimePeriodInSecs option of each built-in index in cluser
+* [spl_change_builtin_indexes.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_change_builtin_indexes.yml) - Changing frozenTimePeriodInSecs option of each built-in index;
+* [spl_idxc_change_builtin_indexes.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_idxc_change_builtin_indexes.yml) - Changing frozenTimePeriodInSecs option of each built-in index in cluser
