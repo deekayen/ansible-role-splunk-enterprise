@@ -33,7 +33,7 @@ Header contains the following sections:
 1. A couple of playbooks from another my repository
 
 #### Ansible
-In our company we using Ansible 2.9 for some reasons. I can't test this set on Ansible > 2.9 so be carefully when yoi run it on different Ansible version.
+In our company we using Ansible 2.9 for some reasons. I can't test this set on Ansible > 2.9 so be carefully when you run it on different Ansible version.
 
 #### VMs
 I could be wrong but the minimum amount of servers according to documentation are:
