@@ -35,7 +35,7 @@
     msg: 'Performing tasks to configure Deployer'
 
 - name: 'SPL :: Configuring {{ spl_home_dir }}\etc\system\local\server.conf'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: 'shclustering'
     ini_option: '{{ item.option }}'

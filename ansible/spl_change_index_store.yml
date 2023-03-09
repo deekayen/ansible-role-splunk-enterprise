@@ -49,7 +49,7 @@
   debug:
     msg: 'Deleting commented values'
 
-- include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+- include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: '_'
     #ini_section: '{{ item.section }}'
@@ -64,7 +64,7 @@
     index_var: loop_idx
 
 - name: 'SPL :: Editing {{ spl_home_dir }}\etc\splunk-launch.conf'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     #ini_section: '_'
     ini_section: '{{ item.section }}'

@@ -18,7 +18,7 @@
 #    spl_install_shortcut # Specify whether or not creating shortcut on desktop and Start Menu
 #    spl_installer_name # Name of Splunk installer
 #    spl_installer_location # Installer location
-#    spl_username # Splunk admin account
+#    spl_username # Splunk admin account; Taken from inventory
 #    spl_password # Password of admin account
 #      
 #  Output:

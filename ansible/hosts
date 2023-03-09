@@ -1,0 +1,44 @@
+
+[spl:children]
+spl_b_p_idx
+spl_b_p_mn
+spl_b_p_sh
+spl_b_p_shd
+
+[spl:vars]
+ansible_connection = winrm
+ansible_winrm_transport = credssp
+ansible_winrm_ca_trust_path = /etc/ssl/certs/RootCA.cer # Path to certificate for WinRM connection
+spl_home_dir = 'C:\Program Files\Splunk' # Path to Splunk home dir
+spl_ldap_server_name1 = 'ldap1.domain.example.com' # First LDAP server
+spl_ldap_server_name2 = 'ldap2.domain.example.com' # Second LDAP server
+spl_username = 'admin'
+spl_password = 'password'
+
+#Indexer servers
+[spl_idx]
+idx01.domain.example.com
+idx02.domain.example.com
+idx03.domain.example.com
+
+[spl_idx:vars]
+
+#Manager node servers
+[spl_mn]
+cbp-spl-ms01.domain.example.com
+
+[spl_b_p_ms:vars]
+
+#Search head servers
+[spl_sh]
+sh01.domain.example.com
+sh02.domain.example.com
+sh03.domain.example.com
+
+[spl_sh:vars]
+
+#Search head deployer servers
+[spl_shd]
+ms01.domain.example.com
+
+[spl_shd:vars]

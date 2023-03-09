@@ -35,7 +35,7 @@
 ---
 
 - name: 'SPL :: Mapping roles with LDAP groups by editing {{ spl_home_dir }}\etc\system\local\authentication.conf'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: 'roleMap_{{ spl_ldap_name }}'
     #ini_section: '{{ item.section }}'

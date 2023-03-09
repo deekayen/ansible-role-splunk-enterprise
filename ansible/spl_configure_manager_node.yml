@@ -42,7 +42,7 @@
     splunk edit cluster-config -mode manager -replication_factor '{{ spl_idxc_rep_factor }}' -search_factor '{{ spl_search_factor }}' -cluster_label '{{ spl_idxc_label }}' -auth '{{ spl_username }}:{{ spl_password }}'
 
 - name: 'SPL :: Performing best-practice cluster settings'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: 'clustering'
     #ini_section: '{{ item.section }}'

@@ -33,7 +33,7 @@
 ---
 
 - name: 'SPL :: Creating health_check role to monitor indexers status'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: 'role_health_check'
     #ini_section: '{{ item.section }}'

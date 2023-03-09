@@ -40,7 +40,7 @@
   loop: '{{ spl_app_dir_list }}'
 
 - name: 'SPL :: Disabling app'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: 'install'
     #ini_section: '{{ item.section }}'

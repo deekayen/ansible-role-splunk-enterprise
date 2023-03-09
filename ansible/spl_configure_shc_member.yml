@@ -54,7 +54,7 @@
     splunk init shcluster-config -auth '{{ spl_username }}:{{ spl_password }}' -mgmt_uri '{{ spl_shc_member_uri }}' -replication_port '{{ spl_shc_rep_port }}' -replication_factor '{{ spl_shc_rep_factor }}' -conf_deploy_fetch_url '{{ spl_deployer_uri }}' -shcluster_label '{{ spl_shc_label }}'
 
 - name: 'SPL :: Editing {{ spl_home_dir }}\etc\system\local\server.conf'
-  include_tasks: ../ansible_play/windows/windows_edit_ini.yml
+  include_tasks: ./windows/windows_edit_ini.yml
   vars:
     ini_section: 'shclustering'
     #ini_section: '{{ item.section }}'
