@@ -34,7 +34,17 @@ In our company we using Ansible 2.9 for some reasons. I can't test this set on A
 
 #### VMs
 I could be wrong but the minimum amount of servers according to documentation are:
-* One server for manager node role
-* One server for search head deployer role
-* Three servers for indexer cluster
-* Three servers for serch head cluser
+* 1 server for manager node role
+* 1 server for search head deployer role
+* 3 servers for indexer cluster
+* 3 servers for serch head cluser
+* If you have small production environment you can run first roles on one VM
+
+#### Splunk Installer
+Download Splunk Installer (*.exe) and put it in place that ansible controller have access to.
+
+#### Psini module
+Powershell Psini module is used to manage Splunk ini configuration files.
+Because servers in our company haven't access to PS Galery i am download module on PC with desired access and then archive it.
+Put Psini *.zip file in place that ansible controller have access to if you have the same situation or use another ways to install it.
+
