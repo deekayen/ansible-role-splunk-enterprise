@@ -67,12 +67,8 @@ To run all set of playbooks you need to set up spl_deploy correctly. In this fil
 
 #### Another playbooks
 I put some playbooks in another repository because they aren't related with splunk directly. Despite this, they are necessary to deployment process. You need:
-* [powershell_install_psini.yml](https://github.com/Po-temkin/windows/blob/main/ansible/powershell/powershell_install_psini.yml)
-* [windows_edit_ini.yml](https://github.com/Po-temkin/windows/blob/main/ansible/windows_edit_ini.yml)
-
-Don't forget to place them on ansible controller in expected place:
-* ./windows/powerhell/powershell_install_psini.yml
-* ./windows/windows_edit_ini.yml
+* [powershell_install_psini.yml](https://github.com/Po-temkin/windows/blob/main/ansible/powershell/powershell_install_psini.yml) - expected place ./windows/powerhell/powershell_install_psini.yml
+* [windows_edit_ini.yml](https://github.com/Po-temkin/windows/blob/main/ansible/windows_edit_ini.yml) - expected place ./windows/windows_edit_ini.yml
 
 ## List of files and description
 Here you can find all playbooks with their description. Playbooks are ordered in of intended launch:
