@@ -27,7 +27,7 @@ idx03.domain.example.com
 [spl_mn]
 cbp-spl-ms01.domain.example.com
 
-[spl_b_p_ms:vars]
+[spl_mn:vars]
 
 #Search head servers
 [spl_sh]

@@ -18,6 +18,8 @@ Header contains the following sections:
     * List of required variables and some information about each of it
 * Output: 
     * List of output variables if they exist
+* Requirements
+    * Required additional information 
 
 #### Getting Started
 ## Getting started with this playbooks will requires you to:
@@ -48,3 +50,13 @@ Powershell Psini module is used to manage Splunk ini configuration files.
 Because servers in our company haven't access to PS Galery i am download module on PC with desired access and then archive it.
 Put Psini *.zip file in place that ansible controller have access to if you have the same situation or use another ways to install it.
 
+#### LDAP and SMTP server
+You need this servers if you want to authenticate in Splunk via LDAP and send notification.
+
+#### Inventory
+Determine varibles which represented in example host.ini file.
+Aslo determine role of each VM using the following groups:
+* spl_idx - Members of indexer cluster
+* spl_mn - Manager node server
+* spl_sh - Members of search head cluster
+* spl_shd - Search head deployer server
