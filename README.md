@@ -7,7 +7,7 @@ I used this playbooks to deploy Splunk in my company.
 1. Getting Started
 1. List of playbooks
 
-#### Desctiption
+### Desctiption
 In each playbook you can find some usable information in header-comment.
 Header contains the following sections:
 * Tested on:
@@ -21,7 +21,7 @@ Header contains the following sections:
 * Requirements
     * Required additional information 
 
-#### Getting Started
+### Getting Started
 #### Getting started with this playbooks will requires you to:
 1. Ansible controller
 1. Couple of VMs with Windows Server onboard
@@ -64,4 +64,4 @@ Aslo determine role of each VM using the following groups:
 #### Master Playbook
 To run all set of playbooks you need to set up spl_deploy correctly. In this file you determine most of variables and select which playbooks you need to run. Example spl_deploy.yml file contain all playbooks but you can delete some if you understand that you don't need it.
 
-#### List of playbooks
+### List of playbooks
