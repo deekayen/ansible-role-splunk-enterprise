@@ -74,3 +74,9 @@ I put some playbooks in another repository because they aren't related with splu
 Here you can find all playbooks with their description. Playbooks are ordered in order of intended launch:
 * [spl_install_spl.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_install_spl.yml) - Installing Splunk Enterprise;
 * [spl_add_path.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_add_path.yml) - Adding Splunk executable dir to path. After this you can call splunk from CMD or Powershell;
+* [powershell_install_psini.yml](https://github.com/Po-temkin/windows/blob/main/ansible/powershell/powershell_install_psini.yml) - Installing Psini module from archive;
+* [spl_change_index_store.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_change_index_store.yml) - Changing index store location;
+* [spl_configure_manager_node.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_manager_node.yml) - Configuring Splunk Manager node role and performing some 'best practice' settings;
+* [spl_configure_idxc_member.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_idxc_member.yml) - Configuring Indexer cluster members;
+* [spl_configure_deployer.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_deployer.yml) - Configuring Splunk Deployer role;
+* [spl_configure_shc_member.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_shc_member.yml) - 

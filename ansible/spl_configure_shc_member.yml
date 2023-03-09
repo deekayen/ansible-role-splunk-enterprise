@@ -14,7 +14,7 @@
 #
 #  Description:
 #    Configuring Indexer cluster members
-#    Search head cluster sercet set directly
+#    Search head cluster secret is set directly
 #    Using 'secret' option in 'init shcluster-config' command cause to password mismatch with Deployer
 #    Link to post: https://community.splunk.com/t5/Deployment-Architecture/Error-while-applying-shcluster-bundle-on-deployer/m-p/628236
 #
