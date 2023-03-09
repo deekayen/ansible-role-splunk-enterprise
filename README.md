@@ -1,5 +1,5 @@
 # splunk-enterprise
-This repository contains set of playbooks which could be used to deploy Splunk Enterprise on Windows Server via WinRM.
+This repository contains set of playbooks which could be used to deploy Distributed Splunk Enterprise environment on Windows Server via WinRM.
 I used this playbooks to deploy Splunk in my company.
 
 ## Table of content
@@ -30,3 +30,11 @@ Header contains the following sections:
 1. 'Master' playbook (spl_deploy.yml) with defined variables and all needed tasks
 
 #### Ansible
+In our company we using Ansible 2.9 for some reasons. I can't test this set on Ansible > 2.9 so be carefully when yoi run it on different Ansible version.
+
+#### VMs
+I could be wrong but the minimum amount of servers according to documentation are:
+* One server for manager node role
+* One server for search head deployer role
+* Three servers for indexer cluster
+* Three servers for serch head cluser
