@@ -79,4 +79,16 @@ Here you can find all playbooks with their description. Playbooks are ordered in
 * [spl_configure_manager_node.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_manager_node.yml) - Configuring Splunk Manager node role and performing some 'best practice' settings;
 * [spl_configure_idxc_member.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_idxc_member.yml) - Configuring Indexer cluster members;
 * [spl_configure_deployer.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_deployer.yml) - Configuring Splunk Deployer role;
-* [spl_configure_shc_member.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_shc_member.yml) - 
+* [spl_configure_shc_member.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_shc_member.yml) - Configuring Indexer cluster members;
+* [spl_bring_shc_captain.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_bring_shc_captain.yml) - Bringing up Search head cluster captain;
+* [spl_shc_to_idxc.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_shc_to_idxc.yml) - Connecting Search head cluster member to Indexer cluster;
+* [spl_disable_default_app.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_disable_default_app.yml) - Disabling default Splunk app(s) by adding 'state = disabled' in app.conf;
+* [spl_create_health_check_role.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_create_health_check_role.yml) - Creating health check role. This role have rights to REST endpoint https://example.server.com:8089/services/server/info which contain 'health_info' property.You can use this information to check indexer status which may be used on hardware load balancer;
+* [spl_create_local_user.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_create_local_user.yml) - Creating local user;
+* [spl_ldap_add_auth.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_ldap_add_auth.yml) - Adding LDAP authentication type to authentication.conf;
+* [spl_ldap_map_roles.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_ldap_map_roles.yml) - Mapping built-in Splunk groups with LDAP groups;
+* [spl_ldap_enable_auth.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_ldap_enable_auth.yml) - Enabling added LDAP stanza(s);
+* [spl_change_admin_email.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_change_admin_email.yml) - Changing buil-in admin email;
+* [spl_configure_smtp.yml](https://github.com/Po-temkin/splunk-enterprise/blob/main/ansible/spl_configure_smtp.yml) - Adding SMTP configuration;
+* [spl_change_builtin_indexes.yml]() - Changing frozenTimePeriodInSecs option of each built-in index
+* [spl_idxc_change_builtin_indexes.yml]() - Changing frozenTimePeriodInSecs option of each built-in index in cluser
