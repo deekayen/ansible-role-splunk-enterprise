@@ -3,7 +3,7 @@ This repository contains set of playbooks which could be used to deploy Splunk E
 I used this playbooks to deploy Splunk in my company.
 
 ## Table of content
-1. [Description](#description)
-1. [Getting Started](#getting-started)
+1. Description
+1. Getting Started
 
 #### Desctiption
