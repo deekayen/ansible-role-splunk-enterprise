@@ -4,7 +4,7 @@ I used this playbooks to deploy Splunk in my company.
 
 ## Table of content
 1. [Description](#description)
-1. Getting Started
+1. [Getting Started](#getting-started)
 1. List of files and description
 
 ## Desctiption
@@ -21,7 +21,7 @@ Header contains the following sections:
 * Requirements
     * Required additional information 
 
-### Getting Started
+## Getting Started
 #### Getting started with this playbooks will requires you to:
 1. Ansible controller
 1. A couple of VMs with Windows Server onboard
