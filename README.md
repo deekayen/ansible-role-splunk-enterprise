@@ -11,6 +11,9 @@ In each playbook you can find some usable information in header-comment.
 Header contains the following sections:
 * Tested on:
     * Version of environment in which playbook tested
-* Description: Desctiption of playbook
-* Input: List of required variables
-* Output: List of output variables if they exist
+* Description:
+    * Desctiption of playbook
+* Input: 
+    * List of required variables
+* Output: 
+    * List of output variables if they exist
