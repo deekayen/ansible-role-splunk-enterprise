@@ -7,7 +7,7 @@ I used this playbooks to deploy Splunk in my company.
 1. Getting Started
 1. List of files and description
 
-### Desctiption
+## Desctiption
 In each playbook you can find some usable information in header-comment.
 Header contains the following sections:
 * Tested on:
