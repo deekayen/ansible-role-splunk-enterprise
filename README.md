@@ -1,4 +1,4 @@
-# splunk-enterprise
+# splunk-windows-ansible
 This repository contains set of Ansible playbooks which could be used to deploy Distributed Splunk Enterprise environment on Windows Server via WinRM.
 I used this playbooks to deploy Splunk in my company.
 
