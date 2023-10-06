@@ -1,0 +1,8 @@
+---
+# defaults file for ansible-splunk-enterprise
+
+splunk_download_url: https://download.splunk.com/products/splunk/releases/9.1.1/windows/splunk-9.1.1-64e843ea36b1-x64-release.msi
+
+splunk_home_dir: 'C:\Program Files\Splunk'
+splunk_admin_user: ''
+splunk_admin_pass: ''

@@ -1,0 +1,27 @@
+---
+
+- name: Verify Splunk login information is set.
+  ansible.builtin.assert:
+    that:
+      - splunk_admin_user | length > 0
+      - splunk_admin_pass | length > 0
+    fail_msg: "splunk_admin_user and splunk_admin_pass must be defined."
+    success_msg: "Login credentials found."
+
+- name: 'Install the Splunk MSI package.'
+  ansible.windows.win_package:
+    path: "{{ splunk_download_url }}"
+    provider: msi
+    product_id: '{3736D415-5488-4A28-896A-E2BCFDCCE757}'
+    arguments: "AGREETOLICENSE=Yes INSTALLDIR={{ splunk_home_dir }} SPLUNKUSERNAME={{ splunk_admin_user }} SPLUNKPASSWORD={{ splunk_admin_pass }}"
+  tags:
+    - install
+    - msi
+
+- name: 'Add Splunk home to PATH.'
+  ansible.windows.win_path:
+    elements:
+      - "{{ splunk_home_dir }}\bin"
+  tags:
+    - install
+    - path
