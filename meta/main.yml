@@ -1,6 +1,8 @@
 ---
 
 galaxy_info:
+  role_name: splunk_enterprise
+  namespace: deekayen
   author: David Norman
   description: Install Splunk Enterprise on Windows.
   company: Datavant
