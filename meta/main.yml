@@ -4,6 +4,9 @@ galaxy_info:
   role_name: splunk_enterprise
   author: David Norman
   description: Install Splunk Enterprise on Windows.
+  company: Datavant
+
+  license: 0BSD
 
   min_ansible_version: '2.9'
 
