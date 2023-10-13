@@ -13,7 +13,7 @@
     path: "{{ splunk_download_url }}"
     provider: msi
     product_id: '{3736D415-5488-4A28-896A-E2BCFDCCE757}'
-    arguments: "AGREETOLICENSE=Yes INSTALLDIR={{ splunk_home_dir }} SPLUNKUSERNAME={{ splunk_admin_user }} SPLUNKPASSWORD={{ splunk_admin_pass }}"
+    arguments: "AGREETOLICENSE=Yes INSTALLDIR={{ splunk_home_dir }} SPLUNKUSERNAME={{ splunk_admin_user }} SPLUNKPASSWORD={{ splunk_admin_pass }} /quiet"
   tags:
     - install
     - msi
