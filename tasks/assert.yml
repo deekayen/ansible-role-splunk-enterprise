@@ -1,0 +1,24 @@
+---
+- name: Verify Splunk login information is set.
+  ansible.builtin.assert:
+    that:
+      - splunk_admin_user | length > 0
+      - splunk_admin_pass | length > 0
+    fail_msg: "splunk_admin_user and splunk_admin_pass must be defined."
+    quiet: true
+
+# Splunk rejects admin passwords shorter than eight characters.
+- name: Verify the Splunk admin password is long enough.
+  ansible.builtin.assert:
+    that:
+      - splunk_admin_pass | length >= 8
+      - '"\"" not in splunk_admin_pass'
+    fail_msg: splunk_admin_pass must be at least 8 characters and contain no double quotes.
+    quiet: true
+
+- name: Verify splunk_download_url points at an MSI.
+  ansible.builtin.assert:
+    that:
+      - splunk_download_url is match('^https?://.+\.msi$')
+    fail_msg: "splunk_download_url must be an http(s) URL of a .msi file, got: {{ splunk_download_url }}"
+    quiet: true

@@ -1,19 +1,24 @@
 ---
-
 galaxy_info:
+  namespace: deekayen
   role_name: splunk_enterprise
   author: David Norman
   description: Install Splunk Enterprise on Windows.
   company: Datavant
 
-  license: 0BSD
+  github_branch: main
+  issue_tracker_url: https://github.com/deekayen/ansible-role-splunk-enterprise/issues
 
-  min_ansible_version: '2.9'
+  license: 0BSD
+  min_ansible_version: "2.15"
 
   platforms:
     - name: Windows
       versions:
-        - all
+        - "2016"
+        - "2019"
+        - "2022"
+        - "2025"
 
   galaxy_tags:
     - windows

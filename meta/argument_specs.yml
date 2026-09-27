@@ -1,0 +1,28 @@
+---
+argument_specs:
+  main:
+    short_description: Install Splunk Enterprise on Windows.
+    description:
+      - Installs the Splunk Enterprise MSI with an initial admin account and
+        adds the Splunk bin directory to PATH.
+    author:
+      - David Norman
+    options:
+      splunk_download_url:
+        type: str
+        default: https://download.splunk.com/products/splunk/releases/9.1.1/windows/splunk-9.1.1-64e843ea36b1-x64-release.msi
+        description: >-
+          URL of the Splunk Enterprise MSI. The product_id in the install
+          task matches the default 9.1.1 package.
+      splunk_home_dir:
+        type: str
+        default: 'C:\Program Files\Splunk'
+        description: Splunk installation directory.
+      splunk_admin_user:
+        type: str
+        default: ""
+        description: Initial Splunk admin user name. Required.
+      splunk_admin_pass:
+        type: str
+        default: ""
+        description: Initial Splunk admin password, at least 8 characters. Required.

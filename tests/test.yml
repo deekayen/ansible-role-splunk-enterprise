@@ -1,0 +1,10 @@
+---
+- name: Apply the splunk_enterprise role for a syntax check.
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - role: deekayen.splunk_enterprise
+      vars:
+        splunk_admin_user: admin
+        splunk_admin_pass: syntax-check-only
